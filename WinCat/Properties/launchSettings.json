@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinCat (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinCat (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="WinCat.ShellPage.CodeRunnerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <!--Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
+
+    <StackPanel MaxWidth="700">
+        <StackPanel x:Name="scriptAdder" Orientation="Vertical" Margin="5">
+            <controls:DockPanel LastChildFill="True" x:Name="scriptAdderDock">
+                <Button Margin="5" Width="{Binding ActualHeight, ElementName=scriptAdderDock}" Height="{Binding ActualHeight, ElementName=scriptAdderDock}" x:Name="addButton" Content="Add" controls:DockPanel.Dock="Right" Click="addButton_Click"/>
+                <StackPanel Orientation="Vertical" Padding="5">
+                    <TextBox x:Name="scriptName" PlaceholderText="Name" Margin="2"/>
+                    <controls:DockPanel Margin="2">
+                        <Button x:Name="scriptPicker" controls:DockPanel.Dock="Right" Content="..." Click="scriptPicker_Click"/>
+                        <TextBox x:Name="scriptPath" PlaceholderText="Path"/>
+                    </controls:DockPanel>
+                </StackPanel>
+            </controls:DockPanel>
+            
+        </StackPanel>
+    </StackPanel>
+</Page>
