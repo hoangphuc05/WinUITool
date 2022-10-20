@@ -46,7 +46,8 @@ namespace WinCat.ShellPage
             var filePicker = new FileOpenPicker();
 
             //Get the Window's HWND
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(Window.GetWindow(this));
+            // https://stackoverflow.com/questions/71432263/how-to-retrieve-the-window-handle-of-the-current-winui-3-mainwindow-from-a-page
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle((Application.Current as App)?.Window as Shell);
 
             // Associate the HWND with the file picker
             WinRT.Interop.InitializeWithWindow.Initialize(filePicker, hwnd);
