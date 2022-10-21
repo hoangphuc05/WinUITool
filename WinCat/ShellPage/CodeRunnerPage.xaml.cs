@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WinCat.Model;
+using WinCat.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -29,6 +31,8 @@ namespace WinCat.ShellPage
         public CodeRunnerPage()
         {
             this.InitializeComponent();
+            CodeRunnerViewModel viewModel = new CodeRunnerViewModel();
+            this.DataContext = viewModel;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -38,7 +42,7 @@ namespace WinCat.ShellPage
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ((CodeRunnerViewModel)DataContext).AddScript();
         }
 
         private async void scriptPicker_Click(object sender, RoutedEventArgs e)
@@ -55,7 +59,18 @@ namespace WinCat.ShellPage
             // Use file picker like normal!
             filePicker.FileTypeFilter.Add("*");
             StorageFile file = await filePicker.PickSingleFileAsync();
-            scriptPath.Text = file.Path;
+            scriptPath.Text = file?.Path ?? string.Empty;
+        }
+
+        private void Run_Click(object sender, RoutedEventArgs e)
+        {
+            var a = 1;
+            a++;
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            ((CodeRunnerViewModel)DataContext).RemoveScript((Script)((Button)sender).DataContext);
         }
     }
 }

@@ -7,20 +7,74 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <!--Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
+    <Page.Resources>
+        <DataTemplate x:Key="scriptListTemplate">
+            <controls:DockPanel Padding="5" LastChildFill="True">
+                
+                
+                <controls:DockPanel controls:DockPanel.Dock="Right">
+                    <StackPanel Orientation="Horizontal" controls:DockPanel.Dock="Top">
+                        <Button Margin="0 0 5 0"  Content="Delete" Click="Delete_Click"/>
+                        <Button Margin="5 0 0 0" Content="Run" Click="Run_Click"/>
+                    </StackPanel>
+                    <StackPanel/>
+                </controls:DockPanel>
 
+                <StackPanel  x:Name="parentExpand" Orientation="Vertical">
+                    <Expander
+                        x:Name="contentExpander"
+                        IsExpanded="False"
+                        ExpandDirection="Down"
+                        HorizontalContentAlignment="Left"
+                        Width="500">
+                        <Expander.Header>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </Expander.Header>
+
+                        <Expander.Content>
+                            
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Name: "/>
+                                    <TextBlock Text="{Binding Path=Name}"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Path=Path}"/>
+                                <TextBlock Text="{Binding Path=Description}"/>
+                                <Button Margin="0 0 5 0"  Content="Delete"/>
+                            </StackPanel>
+                            
+                        </Expander.Content>
+                    </Expander>
+                </StackPanel>
+                
+                
+
+                
+            </controls:DockPanel>
+        </DataTemplate>
+    </Page.Resources>
+    
     <StackPanel MaxWidth="700">
         <StackPanel x:Name="scriptAdder" Orientation="Vertical" Margin="5">
             <controls:DockPanel LastChildFill="True" x:Name="scriptAdderDock">
                 <Button Margin="5" Width="{Binding ActualHeight, ElementName=scriptAdderDock}" Height="{Binding ActualHeight, ElementName=scriptAdderDock}" x:Name="addButton" Content="Add" controls:DockPanel.Dock="Right" Click="addButton_Click"/>
                 <StackPanel Orientation="Vertical" Padding="5">
-                    <TextBox x:Name="scriptName" PlaceholderText="Name" Margin="2"/>
+                    <TextBox x:Name="scriptName" PlaceholderText="Name" Margin="2" Text="{Binding NewName, Mode=TwoWay}"/>
                     <controls:DockPanel Margin="2">
                         <Button x:Name="scriptPicker" controls:DockPanel.Dock="Right" Content="..." Click="scriptPicker_Click"/>
-                        <TextBox x:Name="scriptPath" PlaceholderText="Path"/>
+                        <TextBox x:Name="scriptPath" PlaceholderText="Path" Text="{Binding NewPath, Mode=TwoWay}"/>
                     </controls:DockPanel>
+                    <TextBox Margin="2 2 2 0" x:Name="scriptDescription" Text="{Binding NewDescription, Mode=TwoWay}" TextWrapping="Wrap" AcceptsReturn="True" IsSpellCheckEnabled="True" PlaceholderText="Description"/>
                 </StackPanel>
             </controls:DockPanel>
             
         </StackPanel>
+
+        <ListView
+            SelectionMode="Single"
+            ItemsSource="{Binding ScriptsList}"
+            ItemTemplate="{StaticResource scriptListTemplate}"
+            />
+        
     </StackPanel>
 </Page>
